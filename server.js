@@ -189,6 +189,20 @@ app.use(cors({
 }));
 app.use(express.json());
 
+// Hapus ekstensi .html untuk semua route
+app.get('/(.*)?', (req, res, next) => {
+  let path = req.params[0];
+  if (!path.includes('.') && !path.endsWith('/')) {
+    res.sendFile(__dirname + '/public/' + path + '.html');
+  } else {
+    next();
+  }
+});
+
+app.get('/login', (req, res) => {
+  res.sendFile(__dirname + '/public/login.html');
+});
+
 // Cek status pause dari Firebase
 async function isPaused() {
   try {
