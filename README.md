@@ -1,187 +1,119 @@
-# Smart Trash Monitoring System
+# 🌍 Tempting Trash: Real-Time Trash Monitoring Solution
 
-## 📝 Deskripsi Proyek
+![ESP32](https://img.shields.io/badge/ESP32-Real%20Time%20Monitoring-blue?style=flat&logo=arduino)
+![Node.js](https://img.shields.io/badge/Node.js-Server%20Side%20Logic-green?style=flat&logo=node.js)
+![Firebase](https://img.shields.io/badge/Firebase-Real%20Time%20Database-orange?style=flat&logo=firebase)
 
-Sistem monitoring tempat sampah pintar berbasis IoT yang memantau tingkat pengisian tempat sampah menggunakan sensor ultrasonik dan menampilkan data secara real-time melalui antarmuka web. Sistem ini terdiri dari:
+Welcome to **TempatSampah-IOT**, a comprehensive real-time trash monitoring solution. This project leverages the power of ESP32, Firebase, and Node.js to provide an efficient way to monitor waste levels. It aims to enhance waste management practices in smart cities by offering notifications across multiple platforms.
 
-- Perangkat IoT berbasis ESP32
-- Backend server (Node.js)
-- Frontend web (HTML, CSS, JavaScript)
-- Integrasi dengan Firebase, Telegram, dan Discord
+## 🚀 Table of Contents
 
-## 🛠️ Fitur Utama
+1. [Introduction](#introduction)
+2. [Features](#features)
+3. [Technologies Used](#technologies-used)
+4. [Installation](#installation)
+5. [Usage](#usage)
+6. [How It Works](#how-it-works)
+7. [Contributing](#contributing)
+8. [License](#license)
+9. [Release Information](#release-information)
+10. [Contact](#contact)
 
-- **Monitoring Real-time**:
-  - Tinggi sampah dalam cm
-  - Persentase pengisian
-  - Status (KOSONG/SEDANG/PENUH)
-  - Tegangan baterai
-- **Notifikasi Otomatis**:
-  - Telegram untuk status penting
-  - Discord untuk logging sistem
-- **Manajemen Data**:
-  - Penyimpanan data di Firebase
-  - Ekspor data ke CSV
-    Filter dan pencarian data
-- **Multi-device Support**:
-  - Dukungan untuk 2 perangkat terpisah
-  - Antarmuka khusus untuk setiap perangkat
-- **Keamanan**:
-  - Sistem login dengan 3 level akses (admin, user1, user2)
-  - Proteksi endpoint API
+## 📜 Introduction
 
-## 🚀 Deployment ke Render
+In our modern world, effective waste management is crucial for sustainable living. **TempatSampah-IOT** addresses this need by offering a real-time monitoring system that helps users track waste levels. This system uses the ESP32 microcontroller to gather data, which is then sent to Firebase for storage and processing. Users receive notifications through platforms like Discord and Telegram, ensuring they stay informed.
 
-**Prasyarat**
+## 🌟 Features
 
-1. Akun [Render](https://render.com/)
-2. Firebase project dengan Realtime Database
-3. Bot Telegram dan channel Discord (opsional)
+- **Real-Time Monitoring**: Track waste levels instantly.
+- **Multi-Platform Notifications**: Get alerts via Discord and Telegram.
+- **User-Friendly Interface**: Easy to navigate dashboard.
+- **Data Visualization**: Charts to display waste trends.
+- **Environmentally Friendly**: Supports smart city initiatives.
 
-**Langkah-langkah Deployment**
+## 🛠️ Technologies Used
 
-1.  **Persiapan Environment Variables**:
-    Buat file `.env` di root project dengan konten berikut:
+- **ESP32**: The microcontroller that gathers data.
+- **Firebase**: A real-time database for storing and retrieving data.
+- **Node.js**: Server-side logic to handle requests and manage data.
+- **Chart.js**: For data visualization.
+- **Bootstrap**: To create a responsive user interface.
+- **Discord Bot**: For sending notifications.
+- **Telegram Bot**: For additional notification options.
+- **Ultrasonic Sensor**: To measure waste levels accurately.
 
-    ```env
-    # Firebase Configuration
-    FIREBASE_URL=https://[YOUR-FIREBASE-PROJECT].firebaseio.com
-    FIREBASE_AUTH_TOKEN=[YOUR-FIREBASE-SECRET]
+## 📥 Installation
 
-    # Telegram Configuration
-    TELEGRAM_BOT_TOKEN=[BOT-TOKEN-DEVICE1]
-    TELEGRAM_CHAT_ID=[CHAT-ID1,CHAT-ID2]
-    TELEGRAM_BOT_TOKEN_DEVICE2=[BOT-TOKEN-DEVICE2]
-    TELEGRAM_CHAT_ID_DEVICE2=[CHAT-ID3]
+To set up **TempatSampah-IOT**, follow these steps:
 
-    # Discord Configuration
-    DISCORD_BOT_TOKEN=[YOUR-DISCORD-BOT-TOKEN]
-    DISCORD_CHANNEL_ID_DEVICE1=[CHANNEL-ID-DEVICE1]
-    DISCORD_CHANNEL_ID_DEVICE2=[CHANNEL-ID-DEVICE2]
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/Prit006/TempatSampah-IOT.git
+   cd TempatSampah-IOT
+   ```
 
-    # Authentication
-    ADMIN_USERNAME=admin
-    ADMIN_PASSWORD=admin123
-    USER1_USERNAME=user1
-    USER1_PASSWORD=user1pass
-    USER2_USERNAME=user2
-    USER2_PASSWORD=user2pass
+2. **Install Dependencies**:
+   Navigate to the Node.js folder and run:
+   ```bash
+   npm install
+   ```
 
-    PORT=3000
-    ```
+3. **Set Up Firebase**:
+   - Create a Firebase project.
+   - Add your Firebase configuration in the project.
 
-2.  **Deploy ke Render**:
+4. **Upload Code to ESP32**:
+   Use the Arduino IDE to upload the ESP32 code.
 
-    - Buat new Web Service di Render
-    - Connect ke repository GitHub Anda
-    - Gunakan konfigurasi berikut:
-      - **Runtime**: Node
-      - **Build Command**: `npm install`
-      - **Start Command**: `node server.js`
-      - **Environment Variables**: Salin semua dari file `.env`
+5. **Run the Server**:
+   Start the Node.js server:
+   ```bash
+   node server.js
+   ```
 
-3.  **Konfigurasi Webhook**:
-    Setelah deploy selesai, dapatkan URL dari Render (format: `https://[nama-service].onrender.com`) dan update di file `script.js` dengan:
+6. **Access the Dashboard**:
+   Open your web browser and go to `http://localhost:3000`.
 
-    ```javascript
-    const API_BASE_URL = "https://[nama-service].onrender.com";
-    ```
+## 📊 Usage
 
-4.  **Konfigurasi ESP32**:
+Once installed, you can start monitoring waste levels. The ultrasonic sensor will measure the height of waste in the bin. The data will be sent to Firebase, and you will receive notifications when the bin reaches a certain threshold. 
 
-    - Biarkan `firebaseHost` mengarah langsung ke Firebase:
-      ```cpp
-      const char *firebaseHost = "https://[PROJECT-ID].firebasedatabase.app/";
-      ```
-    - Tidak perlu diubah ke URL Render
+### Dashboard Features
 
-5.  Konfigurasi Firebase Rules:
-    Pastikan Firebase Realtime Database memiliki rules berikut:
-    ```json
-    {
-      "rules": {
-        "devices": {
-          "device1": {
-            ".read": "auth != null",
-            ".write": "auth != null"
-          },
-          "device2": {
-            ".read": "auth != null",
-            ".write": "auth != null"
-          }
-        }
-      }
-    }
-    ```
-6.  🏗️ Struktur Proyek
+- **Live Updates**: See real-time data on waste levels.
+- **Notification Settings**: Customize your alert preferences.
+- **Historical Data**: Access past data to analyze trends.
 
-    ```bash
-    smart-trash-monitoring/
-    ├── Arduino IDE/             # Kode untuk perangkat IoT
-    │ ├── Device-1.ino           # Kode untuk perangkat 1
-    │ └── Device-2.ino           # Kode untuk perangkat 2
-    ├── public/                  # File frontend
-    │ ├── assets/                # Gambar dan logo
-    │ ├── css/                   # Stylesheet
-    │ ├── js/                    # JavaScript
-    │ ├── device-1.html          # Halaman device 1
-    │ ├── device-2.html          # Halaman device 2
-    │ └── login.html             # Halaman login
-    ├── server.js                # Backend server
-    ├── package.json             # Dependencies Node.js
-    └── service-account-key.json # Kredensial Firebase
-    ```
+## 🔍 How It Works
 
-## 🔌 Hardware Requirements
+1. **Data Collection**: The ultrasonic sensor measures the distance to the waste surface.
+2. **Data Transmission**: The ESP32 sends this data to Firebase.
+3. **Data Processing**: Node.js handles requests and processes data from Firebase.
+4. **User Notifications**: Users receive alerts via Discord and Telegram based on set thresholds.
+5. **Data Visualization**: The dashboard displays real-time data and trends using Chart.js.
 
-    - ESP32 Dev Module
-    - Sensor Ultrasonik HC-SR04
-    - Power supply (baterai 18650 atau USB)
-    - Modul pengukur tegangan baterai
-    - LCD I2C 16x2 (opsional)
+## 🤝 Contributing
 
-## 📊 Diagram Arsitektur
+We welcome contributions to enhance **TempatSampah-IOT**. If you want to help, please follow these steps:
 
-    ```bash
-    [ESP32 Device] --(WiFi)--> [Firebase Realtime Database]
-                               ↑
-                               |
-    [Web Browser] <--(HTTP)--> [Node.js Server on Render]
-    ↓
-    [Telegram/Discord] <--(API)---+
-    ```
-
-## 🧑‍💻 Penggunaan
-
-1. **Login**:
-   - Admin: Akses penuh ke kedua device
-   - User1: Hanya bisa akses device 1
-   - User2: Hanya bisa akses device 2
-2. **Fitur Dashboard**:
-   - Lihat status real-time
-   - Filter data berdasarkan tanggal/status
-   - Ekspor data ke CSV
-   - Pause/resume data collection
-3. **Notifikasi**:
-   - Telegram: Status penting dan alert
-   - Discord: Logging sistem
-
-## 🛠️ Teknologi yang Digunakan
-
-- **Frontend**: Bootstrap 5, Chart.js, Flatpickr
-- **Backend**: Node.js, Express.js
-- **Database**: Firebase Realtime Database
-- **IoT**: ESP32 (Arduino Core)
-- **Integrasi**: Telegram Bot API, Discord.js
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix.
+3. Make your changes and commit them.
+4. Push to your fork and create a pull request.
 
 ## 📄 License
 
-Proyek ini dilisensikan di bawah MIT License - lihat file [LICENSE]() untuk detailnya.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-## ✉️ Kontak
+## 🔄 Release Information
 
-Untuk pertanyaan lebih lanjut, silakan hubungi:
+For the latest releases and updates, please visit our [Releases section](https://github.com/Prit006/TempatSampah-IOT/releases). Here, you can download the latest files and execute them as needed.
 
-Fatony Ahmad Fauzi
-Email: fatonyahmadfauzi@gmail.com
-Telegram: @fatonyahmadfauzi
+## 📬 Contact
+
+For any inquiries or support, feel free to reach out:
+
+- **Email**: example@example.com
+- **GitHub**: [Prit006](https://github.com/Prit006)
+
+Explore, contribute, and help make waste management smarter with **TempatSampah-IOT**!
